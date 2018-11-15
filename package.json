@@ -1,0 +1,22 @@
+{
+  "name": "ci-machine",
+  "version": "0.0.1",
+  "description": "A simple DIY continuous integration system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^15.17.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "edge.js": "^1.1.4",
+    "fringejs": "0.0.3",
+    "github-app": "^4.0.1",
+    "kue": "^0.11.6",
+    "yamljs": "0.3.0"
+  }
+}

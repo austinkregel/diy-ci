@@ -1,0 +1,31 @@
+machines:
+  machine-php:
+    name: php-710
+    language: php
+    version: 7.1
+    disabled-plugins:
+      - mbstring
+    enabled-plugins:
+      - composer
+  machine-node:
+    name: node-102
+    language: node
+    version: 10.2
+tests-suite:
+  - container: node-102
+    commands:
+      - npm install
+      - npm run test
+  - container: php-710
+    commands:
+      - composer install
+      - ./vendor/bin/phpunit
+deployment:
+  # Depoyments will only happen when we run everything, and they succeed for the branch listed.
+  branch: master
+  method: webhook # CodeDeploy, BitBucket, ect.
+  hooks:
+    # Here we can just 
+    - url: 'https://forge.laravel.com/api/deployment?api_token={{API_TOKEN}}'
+    - url: 'https://api.slack.com/message?api_token{{API_TOKEN}}'
+      format: '{"text":"Allow me to reintroduce myself!"}'
