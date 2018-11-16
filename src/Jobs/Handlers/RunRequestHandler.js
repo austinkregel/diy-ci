@@ -9,16 +9,24 @@ app.make('queue').register((new RunRequest()).getQueueName(), async (job, done) 
     //   - Clone the repo.
     //   - Run the install script from the configuration file.
     //   - Update the status in github
-    app.make('github').asInstallation(data.installation.id).then(github => {
-        github.repos.getContent({
-            owner: data.repository.owner.login,
-            repo: data.repository.name,
-            path: '.custom_file.yml',
-            ref: data.check_suite.head_sha
-        })
-    }).catch(e => {
-        app.log.info('Your response is bad', {e})
+    let github = await app.make('github').asInstallation(data.installation.id)
+    console.log(github)
+    github.repos.getContent({
+        owner: data.repository.owner.login,
+        repo: data.repository.name,
+        path: '.project.yml',
+        ref: data.check_suite.head_sha
     })
+        .then(datap2 => console.log(datap2))
+        .catch(err => {
+            if (err.code === 404) {
+                console.log('Your file is not found.')
+            }
+            else {
+                console.log(err)
+            }
+        });
+
 
     done()
     // let config = parseConfigFile(response.contents);

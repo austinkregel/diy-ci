@@ -1,7 +1,7 @@
 require('dotenv').config({})
 require('fringejs')
 app.log.info = (message, context = []) => {
-        console.log('[-]', message, context)
+    console.log('[-]', message, context)
 }
 
 let { queryRequest } = require('./bootstrap/app');
@@ -13,7 +13,6 @@ let bodyParser = require('body-parser');
 
 // parse application/json
 Router.express.use(bodyParser.json())
-
 
 Router.get('/register', (req, res) => {
     return edge.render('home', {
